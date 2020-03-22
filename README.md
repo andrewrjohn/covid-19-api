@@ -1,6 +1,22 @@
 ## COVID-19 Tracker API
 Get global and country-specific information regarding number of cases of COVID-19. Updated every 10 minutes.
 
+#### Example Response
+*Note that "new" is always comparative to the previous day.*
+```
+{
+    "country_name": "USA",
+    "total_cases": 32356,
+    "new_cases": 8149,
+    "total_deaths": 414,
+    "new_deaths": 112,
+    "total_recovered": 178,
+    "active_cases": 31764,
+    "critical_cases": 795,
+    "cases_per_million": 98
+}
+```
+
 
 #### Current Endpoints 
 - _/api/cases/countries_

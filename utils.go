@@ -10,7 +10,7 @@ import (
 func StringToInt(s string) int64 {
 
 	var str string
-	str = strings.TrimSpace(strings.Replace(s, ",", "", -1))
+	str = strings.TrimSpace(strings.Replace(strings.Replace(s, "+", "", -1), ",", "", -1))
 	if str == "" {
 		str = "0"
 	}

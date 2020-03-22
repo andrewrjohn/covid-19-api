@@ -43,7 +43,7 @@ func getGlobalCases() {
 
 	cases := []CountryStruct{}
 
-	doc.Find("#main_table_countries tbody tr").Each(func(i int, s *goquery.Selection) {
+	doc.Find("table tbody tr").Each(func(i int, s *goquery.Selection) {
 		CountryName := strings.TrimSpace(s.Find("td").Eq(0).Text())
 
 		TotalCases := StringToInt(s.Find("td").Eq(1).Text())
@@ -55,11 +55,11 @@ func getGlobalCases() {
 			TotalDeaths,
 			TotalRecovered,
 		}
-		// fmt.Printf("%v", newCountry)
+		// fmt.Printf("%v\n", newCountry)
 		cases = append(cases, newCountry)
 	})
 	DataStore.GlobalCases = cases
-	fmt.Printf(("Fetched Global Cases\n"))
+	fmt.Printf(("Updated DataStore.GlobalCases\n"))
 }
 
 // FetchData kicks off the data scraping process
@@ -67,6 +67,6 @@ func FetchData() {
 	getGlobalCases()
 
 	// Update our cached data
-	time.Sleep(5 * time.Second)
+	time.Sleep(10 * time.Minute)
 	FetchData()
 }

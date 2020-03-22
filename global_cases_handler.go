@@ -10,7 +10,7 @@ import (
 func GlobalCasesHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	// cases := getCases()
-	// fmt.Printf("%d countries found", len(cases))
+	// fmt.Printf("%d countries found", len(DataStore.GlobalCases))
 	json.NewEncoder(w).Encode(DataStore.GlobalCases)
 }
 

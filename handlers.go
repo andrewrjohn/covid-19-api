@@ -32,8 +32,16 @@ func CountryHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	countryName := strings.Replace(vars["country"], "_", " ", -1)
 	countryCases := FilterCountry(DataStore.GlobalCases, func(c CountryStruct) bool {
-		return strings.Contains(strings.ToLower(c.CountryName), countryName)
+		return strings.ToLower(c.CountryName) == countryName
 	})
+
+	// Error handling if country isn't found
+	if len(countryCases) == 0 {
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte("404 - Country Not Found"))
+	} else {
+		json.NewEncoder(w).Encode(countryCases[0])
+	}
 	// fmt.Printf("%d countries found", len(cases))
-	json.NewEncoder(w).Encode(countryCases[0])
+
 }

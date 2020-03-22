@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -59,7 +58,7 @@ func getGlobalCases() {
 		cases = append(cases, newCountry)
 	})
 	DataStore.GlobalCases = cases
-	fmt.Printf(("Updated DataStore.GlobalCases\n"))
+	// fmt.Printf(("Updated DataStore.GlobalCases\n"))
 }
 
 // FetchData kicks off the data scraping process

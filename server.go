@@ -4,18 +4,27 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	fmt.Printf("Server running on http://localhost:8080\n\n")
+	r := mux.NewRouter()
 
 	// Kicks off the scraping functions for the individual endpoints
+	fmt.Printf("Fetching initial data...\n")
 	go FetchData()
 
 	// Endpoints
-	http.Handle("/api/cases/unitedstates", http.HandlerFunc(USCasesHandler))
-	http.Handle("/api/cases/global", http.HandlerFunc(GlobalCasesHandler))
-	http.Handle("/api/cases/china", http.HandlerFunc(ChinaCasesHandler))
+	r.HandleFunc("/api/cases/countries", GlobalCasesHandler).
+		Methods("GET")
+	r.HandleFunc("/api/cases/countries/{country}", CountryHandler).
+		Methods("GET")
+	// r.HandleFunc("/api/cases/unitedstates", USCasesHandler)
+
+	http.Handle("/", r)
+
+	fmt.Printf("Server running on http://localhost:8080\n\n")
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

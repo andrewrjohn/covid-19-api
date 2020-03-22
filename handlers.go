@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"strings"
+
+	"github.com/gorilla/mux"
 )
 
 // GlobalCasesHandler returns the number of global cases
@@ -14,12 +16,14 @@ func GlobalCasesHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(DataStore.GlobalCases)
 }
 
-// ChinaCasesHandler returns the stats for China
-func ChinaCasesHandler(w http.ResponseWriter, r *http.Request) {
+// CountryHandler returns the stats for a specific country
+func CountryHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	chinaCases := FilterCountry(DataStore.GlobalCases, func(c CountryStruct) bool {
-		return strings.Contains(strings.ToLower(c.CountryName), "china")
+	vars := mux.Vars(r)
+	countryName := strings.Replace(vars["country"], "_", " ", -1)
+	countryCases := FilterCountry(DataStore.GlobalCases, func(c CountryStruct) bool {
+		return strings.Contains(strings.ToLower(c.CountryName), countryName)
 	})
 	// fmt.Printf("%d countries found", len(cases))
-	json.NewEncoder(w).Encode(chinaCases[0])
+	json.NewEncoder(w).Encode(countryCases[0])
 }

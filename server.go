@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -29,7 +30,11 @@ func main() {
 
 	http.Handle("/", r)
 
-	fmt.Printf("Server running on http://localhost:8080\n\n")
-
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	var port string
+	port = os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	fmt.Printf("Server running on http://localhost%s\n\n", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

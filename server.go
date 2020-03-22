@@ -15,6 +15,9 @@ func main() {
 	fmt.Printf("Fetching initial data...\n")
 	go FetchData()
 
+	// Middleware
+	r.Use(DefaultMiddleware)
+
 	// Endpoints
 	r.HandleFunc("/api/cases/countries", GlobalCasesHandler).
 		Methods("GET")

@@ -22,13 +22,13 @@ func StringToInt(s string) int64 {
 	return i
 }
 
-// FilterCountry filters a CountryStruct from the country list
-func FilterCountry(vs []CountryStruct, f func(CountryStruct) bool) []CountryStruct {
-	vsf := make([]CountryStruct, 0)
-	for _, v := range vs {
-		if f(v) {
-			vsf = append(vsf, v)
+// FindCountry finds a country from the DataStore based off the country name
+func FindCountry(name string) CountryStruct {
+	var foundCountry CountryStruct
+	for _, c := range DataStore.GlobalCases {
+		if strings.ToLower(c.CountryName) == strings.ToLower(name) {
+			foundCountry = c
 		}
 	}
-	return vsf
+	return foundCountry
 }

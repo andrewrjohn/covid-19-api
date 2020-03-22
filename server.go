@@ -21,6 +21,8 @@ func main() {
 	// Endpoints
 	r.HandleFunc("/api/cases/countries", GlobalCasesHandler).
 		Methods("GET")
+	r.HandleFunc("/api/cases/countries/summary", SummaryHandler).
+		Methods("GET")
 	r.HandleFunc("/api/cases/countries/{country}", CountryHandler).
 		Methods("GET")
 	// r.HandleFunc("/api/cases/unitedstates", USCasesHandler)

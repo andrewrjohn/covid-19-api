@@ -19,17 +19,20 @@ func GlobalCasesHandler(w http.ResponseWriter, r *http.Request) {
 func CountryHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	countryName := strings.Replace(vars["country"], "_", " ", -1)
-	countryCases := FilterCountry(DataStore.GlobalCases, func(c CountryStruct) bool {
-		return strings.ToLower(c.CountryName) == countryName
-	})
+	countryCases := FindCountry(countryName)
 
 	// Error handling if country isn't found
-	if len(countryCases) == 0 {
+	if countryCases == (CountryStruct{}) {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte("404 - Country Not Found"))
 	} else {
-		json.NewEncoder(w).Encode(countryCases[0])
+		json.NewEncoder(w).Encode(countryCases)
 	}
 	// fmt.Printf("%d countries found", len(cases))
+}
 
+// SummaryHandler returns the total numbers in a single object
+func SummaryHandler(w http.ResponseWriter, r *http.Request) {
+	summary := FindCountry("Total:")
+	json.NewEncoder(w).Encode(summary)
 }

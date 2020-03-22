@@ -1,5 +1,5 @@
 ## COVID-19 Tracker API
-Get global and country-specific information regarding number of cases of COVID-19. Updated every 10 minutes.
+Get global and country-specific information regarding number of cases of COVID-19. Updated every 10 minutes. Data is scraped but responses are dirty cached in memory to reduce response time.
 
 #### Current Endpoints 
 - _/api/cases/countries_
@@ -7,7 +7,7 @@ Get global and country-specific information regarding number of cases of COVID-1
 - _/api/cases/countries/{country_name}_
   
 #### Example Response
-*Note that "new" is always comparative to the previous day.*
+Note that **new** is always comparative to the previous day.
 ```
 {
     "country_name": "USA",

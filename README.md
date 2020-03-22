@@ -8,4 +8,4 @@ Get global and country-specific information regarding number of cases of COVID-1
 - _/api/cases/countries/{country_name}_
 
 #### Resources
-Data taken from [worldometers.com](https://www.worldometers.info/coronavirus/).
+- [worldometers.com](https://www.worldometers.info/coronavirus/)

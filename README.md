@@ -1,6 +1,11 @@
 ## COVID-19 Tracker API
 Get global and country-specific information regarding number of cases of COVID-19. Updated every 10 minutes.
 
+#### Current Endpoints 
+- _/api/cases/countries_
+- _/api/cases/countries/summary_
+- _/api/cases/countries/{country_name}_
+  
 #### Example Response
 *Note that "new" is always comparative to the previous day.*
 ```
@@ -16,12 +21,6 @@ Get global and country-specific information regarding number of cases of COVID-1
     "cases_per_million": 98
 }
 ```
-
-
-#### Current Endpoints 
-- _/api/cases/countries_
-- _/api/cases/countries/summary_
-- _/api/cases/countries/{country_name}_
 
 #### Resources
 - [worldometers.com](https://www.worldometers.info/coronavirus/)

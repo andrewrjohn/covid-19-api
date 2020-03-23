@@ -1,4 +1,4 @@
-package main
+package db
 
 import (
 	"log"
@@ -10,8 +10,8 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// countryStruct for an individual country
-type countryStruct struct {
+// C for an individual country
+type CountryStruct struct {
 	CountryName     string  `json:"country_name"`
 	TotalCases      int64   `json:"total_cases"`
 	NewCases        int64   `json:"new_cases"`
@@ -24,7 +24,7 @@ type countryStruct struct {
 }
 
 type dataStruct struct {
-	globalCases []countryStruct
+	globalCases []CountryStruct
 }
 
 // dataStore is acting as our "DB" so we can cache it
@@ -46,7 +46,7 @@ func getGlobalCases() {
 		log.Fatal(err)
 	}
 
-	cases := []countryStruct{}
+	cases := []CountryStruct{}
 
 	doc.Find("#main_table_countries_today tbody tr").Each(func(i int, s *goquery.Selection) {
 		CountryName := strings.TrimSpace(s.Find("td").Eq(0).Text())
@@ -60,7 +60,7 @@ func getGlobalCases() {
 		CriticalCases := stringtoInt(s.Find("td").Eq(7).Text())
 		CasesPerMillion, _ := strconv.ParseFloat(s.Find("td").Eq(8).Text(), 64)
 
-		newCountry := countryStruct{
+		newCountry := CountryStruct{
 			CountryName,
 			TotalCases,
 			NewCases,
@@ -85,4 +85,45 @@ func fetchData() {
 	// Update our cached data
 	time.Sleep(10 * time.Minute)
 	fetchData()
+}
+
+// Populate the cache and start the scraping schedule
+func Populate() {
+	go fetchData()
+}
+
+// GetCountries gets all the countries back from the cache
+func GetCountries() []CountryStruct {
+	return dataStore.globalCases
+}
+
+// GetCountryByName returns a single country
+func GetCountryByName(name string) CountryStruct {
+	return findCountry(name)
+}
+
+func stringtoInt(s string) int64 {
+
+	var str string
+	str = strings.TrimSpace(strings.Replace(strings.Replace(s, "+", "", -1), ",", "", -1))
+	if str == "" {
+		str = "0"
+	}
+	i, err := strconv.ParseInt(str, 10, 32)
+	if err != nil {
+		log.Fatal((err))
+	}
+
+	return i
+}
+
+// findCountry finds a country from the dataStore based off the country name
+func findCountry(name string) CountryStruct {
+	var foundCountry CountryStruct
+	for _, c := range dataStore.globalCases {
+		if strings.ToLower(c.CountryName) == strings.ToLower(name) {
+			foundCountry = c
+		}
+	}
+	return foundCountry
 }

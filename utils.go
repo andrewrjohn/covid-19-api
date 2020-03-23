@@ -6,8 +6,8 @@ import (
 	"strings"
 )
 
-// StringToInt util converts strings to int64 with whitespace trimming and empty check
-func StringToInt(s string) int64 {
+// stringtoInt util converts strings to int64 with whitespace trimming and empty check
+func stringtoInt(s string) int64 {
 
 	var str string
 	str = strings.TrimSpace(strings.Replace(strings.Replace(s, "+", "", -1), ",", "", -1))
@@ -22,10 +22,10 @@ func StringToInt(s string) int64 {
 	return i
 }
 
-// FindCountry finds a country from the DataStore based off the country name
-func FindCountry(name string) CountryStruct {
-	var foundCountry CountryStruct
-	for _, c := range DataStore.GlobalCases {
+// findCountry finds a country from the dataStore based off the country name
+func findCountry(name string) countryStruct {
+	var foundCountry countryStruct
+	for _, c := range dataStore.globalCases {
 		if strings.ToLower(c.CountryName) == strings.ToLower(name) {
 			foundCountry = c
 		}

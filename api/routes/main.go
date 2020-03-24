@@ -14,10 +14,6 @@ import (
 func Load() {
 	r := mux.NewRouter()
 
-	// Kicks off the scraping functions for the individual endpoints
-	// fmt.Printf("Fetching initial data...\n")
-	// go fetchData()
-
 	// Middleware
 	middleware.UseWithDefaults(r)
 

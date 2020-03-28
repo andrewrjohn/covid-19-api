@@ -1,12 +1,21 @@
 ## COVID-19 Tracker API
 Get global and country-specific information regarding number of cases of COVID-19. Updated every 10 minutes. Data is scraped and dirty cached in memory to reduce response time.
 
-#### Current Endpoints 
-- _/api/cases/countries_
-- _/api/cases/countries/summary_
-- _/api/cases/countries/{country_name}_
+### Local Installation
+* Clone repo into your Go workspace (i.e. `GOPATH/src`)
+* Run `go install`
+* If you've added your bin folder to your PATH
+  * Run `covid-19-api`
+* If you haven't added your bin folder to your PATH
+  * Run `GOPATH/bin/covid-19-api`
+
+
+### Current Endpoints 
+- `/api/cases/countries`
+- `/api/cases/countries/summary`
+- `/api/cases/countries/{country_name}`
   
-#### Example Response
+### Example Response
 Note that **new** is always comparative to the previous day.
 ```
 {

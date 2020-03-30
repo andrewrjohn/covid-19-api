@@ -1,1 +1,0 @@
-gin -a 8080 run main.go

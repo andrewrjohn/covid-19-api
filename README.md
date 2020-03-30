@@ -13,10 +13,9 @@ Get global and country-specific information regarding number of cases of COVID-1
 To increase your productivity and take advantage of server hot-reloading, do the following steps:
 * Download the utility: `go get github.com/codegangsta/gin`
 * Start the dev server one of two ways:
-  * Use the included .sh file by running `./dev-server.sh` (you'll probably have to add permissions)
+  * Use the included .sh file by running `scripts/dev-server.sh` (you'll probably have to add permissions)
   * Run `gin -a 8080 run main.go`
 * Hot-Loading Server will be running on port 3000
-
 
 
 ### Current Endpoints 

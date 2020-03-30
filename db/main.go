@@ -8,12 +8,13 @@ import (
 type CountryStruct struct {
 	CountryName     string  `json:"country_name"`
 	TotalCases      int64   `json:"total_cases"`
+	ActiveCases     int64   `json:"active_cases"`
 	NewCases        int64   `json:"new_cases"`
+	CriticalCases   int64   `json:"critical_cases"`
 	TotalDeaths     int64   `json:"total_deaths"`
 	NewDeaths       int64   `json:"new_deaths"`
+	DeathRate       string  `json:"death_rate"`
 	TotalRecovered  int64   `json:"total_recovered"`
-	ActiveCases     int64   `json:"active_cases"`
-	CriticalCases   int64   `json:"critical_cases"`
 	CasesPerMillion float64 `json:"cases_per_million"`
 }
 

@@ -38,17 +38,19 @@ func getGlobalCases() {
 		ActiveCases := stringtoInt(s.Find("td").Eq(6).Text())
 		CriticalCases := stringtoInt(s.Find("td").Eq(7).Text())
 		CasesPerMillion, _ := strconv.ParseFloat(s.Find("td").Eq(8).Text(), 64)
+		DeathRate := strconv.FormatFloat(((float64(TotalDeaths)/float64(TotalCases))*100), 'f', 2, 64) + "%"
 
 		newCountry := CountryStruct{
-			CountryName,
-			TotalCases,
-			NewCases,
-			TotalDeaths,
-			NewDeaths,
-			TotalRecovered,
-			ActiveCases,
-			CriticalCases,
-			CasesPerMillion,
+			CountryName:     CountryName,
+			TotalCases:      TotalCases,
+			NewCases:        NewCases,
+			TotalDeaths:     TotalDeaths,
+			NewDeaths:       NewDeaths,
+			TotalRecovered:  TotalRecovered,
+			ActiveCases:     ActiveCases,
+			CriticalCases:   CriticalCases,
+			CasesPerMillion: CasesPerMillion,
+			DeathRate:       DeathRate,
 		}
 		// fmt.Printf("%v\n", newCountry)
 		cases = append(cases, newCountry)

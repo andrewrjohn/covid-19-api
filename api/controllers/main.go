@@ -35,8 +35,6 @@ func Country(w http.ResponseWriter, r *http.Request) {
 
 // Summary returns the total numbers in a single object
 func Summary(w http.ResponseWriter, r *http.Request) {
-	// summary := findCountry("Total:")
-	// json.NewEncoder(w).Encode(summary)
-	res := testResponse{"All good"}
-	json.NewEncoder(w).Encode(res)
+	summary := db.GetCountryByName("Total:")
+	json.NewEncoder(w).Encode(summary)
 }

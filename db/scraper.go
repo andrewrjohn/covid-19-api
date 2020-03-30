@@ -9,7 +9,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// Scrapes the cases and adds them to the cache
 func getGlobalCases() {
 
 	resp, err := http.Get("https://www.worldometers.info/coronavirus/")

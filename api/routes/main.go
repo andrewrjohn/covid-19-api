@@ -2,28 +2,21 @@
 package routes
 
 import (
-	"net/http"
-
 	"covid-19-api/api/controllers"
 	"covid-19-api/api/middleware"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
 // Load loads all the routes
-func Load() {
-	r := mux.NewRouter()
+func Load(r *gin.Engine) {
 
 	// Middleware
-	middleware.UseWithDefaults(r)
+	r.Use(middleware.DefaultMiddleware())
 
 	// Endpoints
-	r.HandleFunc("/api/cases/countries", controllers.Countries).
-		Methods("GET")
-	r.HandleFunc("/api/cases/countries/summary", controllers.Summary).
-		Methods("GET")
-	r.HandleFunc("/api/cases/countries/{country}", controllers.Country).
-		Methods("GET")
-
-	http.Handle("/", r)
+	apiRoutes := r.Group("/api")
+	apiRoutes.GET("/cases/countries", controllers.Countries)
+	apiRoutes.GET("/cases/summary", controllers.Summary)
+	apiRoutes.GET("/cases/countries/:country", controllers.Country)
 }

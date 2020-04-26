@@ -5,5 +5,6 @@ import (
 )
 
 func main() {
+	// ui.InitUI()
 	server.Start()
 }

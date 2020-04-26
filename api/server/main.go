@@ -4,16 +4,18 @@ package server
 import (
 	"fmt"
 	"log"
-	"net/http"
 	"os"
 
 	"covid-19-api/api/routes"
 	"covid-19-api/db"
+
+	"github.com/gin-gonic/gin"
 )
 
 // Start function starts the http server and loads in the necessary routes and middleware
 func Start() {
-	routes.Load()
+	r := gin.Default()
+	routes.Load(r)
 	db.Populate()
 
 	var port string
@@ -22,5 +24,5 @@ func Start() {
 		port = "8080"
 	}
 	fmt.Printf("Server running on http://localhost:%s\n\n", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Fatal(r.Run(":8080"))
 }

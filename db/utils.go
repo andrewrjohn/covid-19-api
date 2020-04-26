@@ -1,7 +1,6 @@
 package db
 
 import (
-	"log"
 	"strconv"
 	"strings"
 )
@@ -14,7 +13,7 @@ func stringtoInt(s string) int64 {
 	}
 	i, err := strconv.ParseInt(str, 10, 32)
 	if err != nil {
-		log.Fatal((err))
+		return 0
 	}
 
 	return i
